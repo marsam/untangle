@@ -15,16 +15,16 @@
 """
 
 import os
+from sys import version_info
 from xml.sax import make_parser, handler
 try:
     from StringIO import StringIO
 except ImportError:
     from io import StringIO
-try:
-    from types import StringTypes
-    is_string = lambda x: isinstance(x, StringTypes)
-except ImportError:
+if version_info[0] == 3:
     is_string = lambda x: isinstance(x, str)
+else:
+    is_string = lambda x: isinstance(x, basestring)
 
 __version__ = '1.1.0'
 
