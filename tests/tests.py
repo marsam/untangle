@@ -205,8 +205,12 @@ class UnicodeTestCase(unittest.TestCase):
     """ Github issue #8: UnicodeEncodeError """
     def test_unicode_file(self):
         o = untangle.parse('tests/res/unicode.xml')
-        self.assertEquals(u'ðÒÉ×ÅÔ ÍÉÒ', o.page.menu.name)
+        self.assertEquals(u'Привет мир', o.page.menu.name)
 
+    def test_unicode_openfile(self):
+        with open('tests/res/unicode.xml') as f:
+            o = untangle.parse(f)
+            self.assertEquals(u'Привет мир', o.page.menu.name)
 
 class FileObjects(unittest.TestCase):
     """ Test reading from file-like objects """
